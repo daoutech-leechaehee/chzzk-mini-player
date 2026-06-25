@@ -1,0 +1,77 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ID 선택자(display:flex 등)가 hidden 속성을 덮어쓰지 않도록 강제 */
+[hidden] { display: none !important; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0d0f;
+  color: #eee;
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 11px;
+  user-select: none;
+  cursor: default;
+}
+
+/* 콘텐츠 영역 (전체 사용) */
+.view {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+/* 목록 */
+#listStatus {
+  padding: 8px;
+  font-size: 10px;
+  color: #888;
+}
+#liveList { list-style: none; overflow-y: auto; height: 100%; }
+#liveList li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #19191e;
+}
+#liveList li:hover { background: #1d1d24; }
+#liveList img {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #333;
+}
+.li-text { min-width: 0; flex: 1; }
+.li-title {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.li-sub {
+  font-size: 9px;
+  color: #9a9a9a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.li-viewers { color: #ff5c5c; font-weight: 700; }
+
+/* 재생 */
+#playerView { background: #000; }
+#video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+#playerStatus {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  font-size: 10px;
+  color: #ddd;
+  background: rgba(0,0,0,0.7);
+}

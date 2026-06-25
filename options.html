@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <title>옵션</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #16161a;
+      color: #eaeaea;
+      font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+      font-size: 13px;
+      padding: 18px 20px;
+      user-select: none;
+    }
+    h1 { font-size: 15px; color: #00ffa3; margin-bottom: 16px; }
+    .row { margin-bottom: 18px; }
+    .toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .toggle input { width: 16px; height: 16px; accent-color: #00ffa3; cursor: pointer; }
+    .label { font-weight: 600; }
+    .desc { font-size: 11px; color: #9a9a9a; margin-top: 5px; line-height: 1.5; }
+    .slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    #sensVal { color: #00ffa3; font-weight: 700; }
+    input[type="range"] { width: 100%; accent-color: #00ffa3; cursor: pointer; }
+    .ends { display: flex; justify-content: space-between; font-size: 10px; color: #777; margin-top: 3px; }
+    .disabled { opacity: 0.4; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <h1>옵션</h1>
+
+  <div class="row">
+    <label class="toggle">
+      <input type="checkbox" id="motionEnabled" />
+      <span class="label">움직임 감지 시 자동 숨김</span>
+    </label>
+    <div class="desc">창이 떠 있을 때 카메라에 움직임이 보이면 자동으로 창을 숨깁니다. (다시 열기: Ctrl+0)</div>
+  </div>
+
+  <div class="row" id="sensRow">
+    <div class="slider-head">
+      <span class="label">민감도</span>
+      <span id="sensVal">50</span>
+    </div>
+    <input type="range" id="sensitivity" min="0" max="100" step="1" value="50" />
+    <div class="ends"><span>둔감 (큰 움직임만)</span><span>민감 (작은 움직임도)</span></div>
+    <div class="desc">민감도가 높을수록 작은 움직임에도 창이 숨겨집니다.</div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1200px; height:630px; overflow:hidden; }
+  body {
+    background: radial-gradient(ellipse at 75% 15%, rgba(0,255,163,0.18), transparent 55%), #0b0b0f;
+    color:#ededf2; font-family:'Pretendard','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+    display:flex; align-items:center; justify-content:space-between; padding:70px 80px; gap:50px;
+  }
+  .left { max-width: 620px; }
+  .pill { display:inline-block; padding:8px 18px; border-radius:999px; background:rgba(0,255,163,0.12);
+    color:#00ffa3; font-size:22px; font-weight:800; border:1px solid rgba(0,255,163,0.3); }
+  h1 { font-size:74px; font-weight:900; line-height:1.1; letter-spacing:-0.02em; margin:26px 0 0; }
+  h1 .g { color:#00ffa3; text-shadow:0 0 30px rgba(0,255,163,0.5); }
+  p { font-size:27px; color:#9a9aa7; margin-top:24px; line-height:1.5; }
+  .kbd { font-weight:800; background:#1c1c25; border:1px solid #26262f; border-bottom-width:4px;
+    padding:6px 14px; border-radius:10px; color:#fff; font-size:24px; }
+  .brand { margin-top:34px; display:flex; align-items:center; gap:13px; font-weight:800; font-size:28px; }
+  .sq { width:40px; height:40px; border-radius:11px; background:#00ffa3; display:grid; place-items:center; }
+  .sq::before { content:''; border-style:solid; border-width:9px 0 9px 15px; border-color:transparent transparent transparent #0b0b0f; margin-left:3px; }
+
+  .miniwin { width:430px; flex-shrink:0; aspect-ratio:16/9; background:#0d0d0f; border:1px solid #2a2a33;
+    border-radius:16px; box-shadow:0 30px 70px rgba(0,0,0,0.6); overflow:hidden; position:relative; }
+  .tag { position:absolute; right:-12px; top:-12px; background:#00ffa3; color:#063; font-weight:900;
+    font-size:18px; padding:8px 14px; border-radius:11px; transform:rotate(7deg); box-shadow:0 6px 18px rgba(0,255,163,0.45); }
+  .row { display:flex; align-items:center; gap:11px; padding:11px 14px; border-bottom:1px solid #18181e; }
+  .av { width:34px; height:34px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,#2bd0a8,#3a7bd5); }
+  .av.b { background:linear-gradient(135deg,#ff7eb3,#ff758c); }
+  .av.c { background:linear-gradient(135deg,#f6d365,#fda085); }
+  .t { min-width:0; flex:1; }
+  .t .a { font-size:17px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .t .b { font-size:15px; color:#9a9aa7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .dot { color:#ff5c5c; font-weight:800; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <span class="pill">🤫 업무용(?) 미니 플레이어</span>
+    <h1>일하는 척하며<br><span class="g">본방 사수</span></h1>
+    <p><span class="kbd">Ctrl</span> <span class="kbd">0</span> 으로 켜고,<br>움직임이 감지되면 알아서 사라지는 3인치 치지직.</p>
+    <div class="brand"><span class="sq"></span> 치지직 미니</div>
+  </div>
+  <div class="miniwin">
+    <span class="tag">3인치 16:9</span>
+    <div class="row"><div class="av"></div><div class="t"><div class="a">월드컵 본방 같이봐요 🔥</div><div class="b"><span class="dot">● 15,598</span> · 탬탬버린</div></div></div>
+    <div class="row"><div class="av b"></div><div class="t"><div class="a">[LIVE] 오늘도 출근 클리어</div><div class="b"><span class="dot">● 12,624</span> · 이스타TV</div></div></div>
+    <div class="row"><div class="av c"></div><div class="t"><div class="a">점심시간 수다방</div><div class="b"><span class="dot">● 10,453</span> · 옥냥이</div></div></div>
+    <div class="row"><div class="av"></div><div class="t"><div class="a">코딩하면서 같이 달리기</div><div class="b"><span class="dot">● 4,974</span> · 유니</div></div></div>
+  </div>
+</body>
+</html>

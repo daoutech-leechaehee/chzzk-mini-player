@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; media-src * blob:; img-src * data:; connect-src *; script-src 'self' blob:; worker-src blob:" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>치지직 미니</title>
+</head>
+<body>
+  <!-- 목록 화면 -->
+  <div id="listView" class="view">
+    <div id="listStatus">불러오는 중…</div>
+    <ul id="liveList"></ul>
+  </div>
+
+  <!-- 재생 화면 -->
+  <div id="playerView" class="view" hidden>
+    <video id="video" autoplay playsinline></video>
+    <div id="playerStatus" hidden></div>
+  </div>
+
+  <script src="node_modules/hls.js/dist/hls.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
