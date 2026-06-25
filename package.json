@@ -19,6 +19,7 @@
   "build": {
     "appId": "com.chzzk.miniplayer",
     "productName": "치지직 미니 플레이어",
+    "artifactName": "ChzzkMiniPlayer-${version}-universal.${ext}",
     "files": [
       "main.js",
       "preload.js",
