@@ -11,6 +11,14 @@ const DEFAULT_W = Math.round((DIAG_INCH * 16 / DIAG_RATIO) * DPI); // ≈ 251
 const DEFAULT_H = Math.round((DIAG_INCH * 9 / DIAG_RATIO) * DPI);  // ≈ 141
 
 const configPath = path.join(app.getPath('userData'), 'config.json');
+const startupLogPath = path.join(app.getPath('userData'), 'startup.log');
+
+// 시작 진단 로그 (userData 폴더에 기록 — 터미널 없이도 원인 파악용)
+function logStartup(msg) {
+  try {
+    fs.appendFileSync(startupLogPath, `[${new Date().toISOString()}] ${msg}\n`);
+  } catch (e) { /* 무시 */ }
+}
 
 function loadConfig() {
   try { return JSON.parse(fs.readFileSync(configPath, 'utf8')); }
@@ -39,7 +47,13 @@ const settings = {
 };
 
 function createTray() {
-  const icon = nativeImage.createFromPath(path.join(__dirname, 'tray.png'));
+  let icon = nativeImage.createFromPath(path.join(__dirname, 'tray.png'));
+  if (icon.isEmpty()) {
+    logStartup('WARN: tray.png 로드 실패 — 빈 아이콘으로 대체');
+  } else if (process.platform === 'darwin') {
+    // macOS 메뉴바 권장 크기(약 18pt)로 리사이즈 — 너무 크게 표시되는 것 방지
+    icon = icon.resize({ width: 18, height: 18 });
+  }
   tray = new Tray(icon);
   tray.setToolTip('치지직 미니 플레이어');
   const menu = Menu.buildFromTemplate([
@@ -239,14 +253,35 @@ if (!app.requestSingleInstanceLock()) {
 } else {
   app.on('second-instance', () => showWindow());
   app.whenReady().then(() => {
+    try { fs.writeFileSync(startupLogPath, ''); } catch (e) { /* 로그 초기화 */ }
+    logStartup(`앱 시작 — platform=${process.platform}, electron=${process.versions.electron}`);
+
     // 카메라(모션 감지) 권한 허용
     session.defaultSession.setPermissionRequestHandler((_wc, _perm, cb) => cb(true));
     session.defaultSession.setPermissionCheckHandler(() => true);
 
     if (process.platform === 'darwin' && app.dock) app.dock.hide(); // macOS: 백그라운드 상주
+
     createWindow();                                                 // 숨김 상태로 생성
-    createTray();                                                   // 트레이(숨겨진 아이콘) 등록
-    globalShortcut.register('CommandOrControl+0', toggleWindow);    // Ctrl/Cmd+0 → 표시/숨김 토글
+
+    try {
+      createTray();                                                 // 트레이(메뉴바) 등록
+      logStartup('트레이 생성 성공');
+    } catch (e) {
+      logStartup('ERROR: 트레이 생성 실패 — ' + (e && e.message));
+    }
+
+    // Ctrl/Cmd+0 → 표시/숨김 토글. 실패하면 대체 단축키 시도.
+    let ok = globalShortcut.register('CommandOrControl+0', toggleWindow);
+    logStartup('단축키 CommandOrControl+0 등록: ' + ok);
+    if (!ok) {
+      ok = globalShortcut.register('CommandOrControl+Shift+0', toggleWindow);
+      logStartup('대체 단축키 CommandOrControl+Shift+0 등록: ' + ok);
+    }
+
+    // 처음 켰을 때 창을 한 번 띄워 "실행됨"을 알림 (이후 단축키/트레이로 토글)
+    showWindow();
+    logStartup('초기 창 표시 완료');
   });
 }
 
