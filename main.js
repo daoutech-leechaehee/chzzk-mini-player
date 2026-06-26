@@ -153,6 +153,8 @@ function createWindow() {
     const template = [];
     if (currentView === 'player') {
       template.push({ label: '뒤로가기', click: () => win.webContents.send('go-back') });
+    } else {
+      template.push({ label: '목록 새로고침', click: () => win.webContents.send('refresh-list') });
     }
     template.push({ label: '종료', click: () => win.hide() });
     Menu.buildFromTemplate(template).popup({ window: win });

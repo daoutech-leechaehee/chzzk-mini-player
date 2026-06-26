@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('api', {
   hide: () => ipcRenderer.send('hide-window'),
   setView: (view) => ipcRenderer.send('set-view', view),
   onGoBack: (cb) => ipcRenderer.on('go-back', cb),
+  onRefreshList: (cb) => ipcRenderer.on('refresh-list', cb),
   // 수동 창 드래그
   dragStart: () => ipcRenderer.send('drag-start'),
   dragMove: (dx, dy) => ipcRenderer.send('drag-move', dx, dy),

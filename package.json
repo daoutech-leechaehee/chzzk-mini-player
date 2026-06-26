@@ -1,6 +1,6 @@
 {
   "name": "chzzk-mini-player",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "백그라운드 상주형 치지직 미니 플레이어 (Ctrl+0 토글)",
   "main": "main.js",
   "scripts": {

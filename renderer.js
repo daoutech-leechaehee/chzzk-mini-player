@@ -238,9 +238,18 @@ document.addEventListener('pointerup', () => {
 // 우클릭 메뉴(메인 프로세스)에서 "뒤로가기" 선택 시
 window.api.onGoBack(() => showList());
 
+// 목록 화면에서만 새로고침 (재생 중에는 무시)
+function refreshList() {
+  if (!listView.hidden) loadLives();
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') window.api.hide();
+  if (e.key === 'F5') { e.preventDefault(); refreshList(); }
 });
+
+// 우클릭 메뉴(메인 프로세스)에서 "목록 새로고침" 선택 시
+window.api.onRefreshList(() => refreshList());
 
 // 창이 숨겨지면 재생 중단 + 카메라 끔. 보던 채널은 currentChannel 에 보존됨.
 window.api.onHidden(() => {
